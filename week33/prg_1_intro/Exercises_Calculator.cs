@@ -17,7 +17,7 @@ public class Level_1_Calculator : ICalculator
 {
     public int Add(int a, int b)
     {
-        throw new NotImplementedException();
+        return a + b;
     }
 
     [Test]
@@ -29,42 +29,50 @@ public class Level_1_Calculator : ICalculator
 
     public int Subtract(int a, int b)
     {
-        throw new NotImplementedException();
+        return a - b;
     }
 
     public int Multiply(int a, int b)
     {
-        throw new NotImplementedException();
+        return a * b;
     }
 
     public int Divide(int a, int b)
     {
-        throw new NotImplementedException();
+        return a / b;
     }
 
     public double Sqrt(int a)
     {
-        throw new NotImplementedException();
+        double result = Math.Sqrt(a);
+        if (result >= 0)
+        {
+            return result;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException();
+        }
     }
 
     public double Power(int a, int b)
     {
-        throw new NotImplementedException();
+        return Math.Pow(a,b);
     }
 
     public int Modulus(int a, int b)
     {
-        throw new NotImplementedException();
+        return a % b;
     }
 
     public int Negate(int a)
     {
-        throw new NotImplementedException();
+        return -a;
     }
 
     public int Abs(int a)
     {
-        throw new NotImplementedException();
+        return Math.Abs(a);
     }
 
 }

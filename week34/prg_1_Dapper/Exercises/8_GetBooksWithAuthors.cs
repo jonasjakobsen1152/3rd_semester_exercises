@@ -13,7 +13,19 @@ public class GetBooksWithAuthorsExercise
     /// <exception cref="NotImplementedException"></exception>
     public IEnumerable<BookWithAuthors> GetBooksWithAuthors()
     {
-        throw new NotImplementedException();
+        var sql = $@"
+        Select
+        title as {nameof(Book.Title)},
+        publisher as {nameof(Book.Publisher)},
+        array_agg(library.authors.name) as {nameof(BookWithAuthors.Authors)}
+        from library.books
+    JOIN library.author_wrote_book_items as junction on books.book_id = junction.book_id
+    JOIN library.authors on junction.author_id = authors.author_id
+    GROUP BY books.book_id, books.title;";
+        using (var conn = Helper.DataSource.OpenConnection())
+        {
+            return conn.Query<BookWithAuthors>(sql);
+        }
     }
 
     [Test]

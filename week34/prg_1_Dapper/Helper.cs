@@ -8,9 +8,9 @@ namespace gettingstarted.week34.prg_1_Dapper;
 
 public static class Helper
 {
-    public static string Mode = "Guided Solution";
+    public static string Mode = "aGuided Solution";
     
-    public static readonly Uri Uri = new Uri(Environment.GetEnvironmentVariable("pgconn")!);
+    public static readonly Uri Uri = new Uri(Environment.GetEnvironmentVariable("jonasapi2")!);
 
     public static readonly string
         ProperlyFormattedConnectionString = string.Format(

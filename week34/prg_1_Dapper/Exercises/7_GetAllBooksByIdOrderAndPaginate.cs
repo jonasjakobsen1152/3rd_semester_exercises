@@ -19,7 +19,30 @@ public class GetAllBooksByIdOrderAndPaginateExercise
     /// <exception cref="NotImplementedException"></exception>
     public IEnumerable<Book> GetAllBooksOrderByAndPaginate(string orderBy, int pageSize, int startAt)
     {
-        throw new NotImplementedException();
+        var sql = $@"
+        Select
+        book_id as {nameof(Book.BookId)}
+        title as {nameof(Book.Title)}
+        publisher as {nameof(Book.Publisher)}
+        coverImgUrl as {nameof(Book.CoverImgUrl)}
+        from library.books
+        ORDER BY {orderBy} ASC
+        offset @startAt
+        limit @pageSize
+        
+
+    ";
+        try
+        {
+            using (var conn = Helper.DataSource.OpenConnection())
+            {
+                return conn.Query<Book>(sql, new { pageSize, startAt });
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Could not order books");
+        }
     }
     [Test]
     public void TestGetAllBooksOrderByAndPaginate()

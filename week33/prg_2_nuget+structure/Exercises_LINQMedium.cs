@@ -15,12 +15,21 @@ public class MediumLinqExercises : IMediumLinqExercises
 {
     public int CountVowels(string text)
     {
-        throw new NotImplementedException();
+        string upperCaseText = text.ToUpper();
+        int vowelCounter = 0;
+        var vowels = from i in upperCaseText
+            where i == 'A' || i == 'I' || i == 'O' || i == 'U' || i == 'E'
+            select i;
+
+        vowelCounter = vowels.Count();
+
+        return vowelCounter;
     }
 
     public List<int> GetNumbersInRange(List<int> numbers, int start, int end)
     {
-        throw new NotImplementedException();
+        var numberInRange = from i in numbers where numbers.IndexOf(i) >= start && numbers.IndexOf(i) <= end select i;
+        return numberInRange.ToList();
     }
 
     public int GetSumOfSquares(List<int> numbers)
@@ -30,27 +39,33 @@ public class MediumLinqExercises : IMediumLinqExercises
 
     public List<string> GetWordsLongerThanN(List<string> words, int n)
     {
-        throw new NotImplementedException();
+        var longWords = from i in words where i.Length > n select i;
+        return longWords.ToList();
     }
 
     public List<string> GetDistinctWords(string text)
     {
-        throw new NotImplementedException();
+        var i = text.Split(" ").Distinct();
+        return i.ToList();
     }
 
     public bool AnyWordStartsWithA(List<string> words)
     {
-        throw new NotImplementedException();
+
+        var aChecker = from i in words where i.ToLower()[0].Equals('a') select i;
+        return aChecker.Any();
     }
 
     public List<int> GetNumbersDivisibleBy3Or5(List<int> numbers)
     {
-        throw new NotImplementedException();
+        var numbersDivisable = from i in numbers where i % 3 == 0 || i % 5 == 0 select i;
+        return numbersDivisable.ToList();
     }
 
     public List<string> GetWordsSortedByLength(string text)
     {
-        throw new NotImplementedException();
+        var words = text.Split(" ").Order();
+        return words.ToList();
     }
 
     public List<int> GetSquaredNumbersSorted(List<int> numbers)
@@ -60,7 +75,7 @@ public class MediumLinqExercises : IMediumLinqExercises
 
     public int CountUniqueCharacters(string text)
     {
-        throw new NotImplementedException();
+        return text.Distinct().Count();
     }
 
     public Dictionary<string, int> GetWordFrequencies(string text)
@@ -70,7 +85,24 @@ public class MediumLinqExercises : IMediumLinqExercises
 
     public string GetLongestString(List<string> strings)
     {
-        throw new NotImplementedException();
+        int counter = 0;
+        string longestString = null;
+        
+        while (strings.Count > counter)
+        {
+            if (longestString == null)
+            {
+                longestString = strings[counter];
+                counter++;
+            }
+            else if (longestString.Length > strings[counter].Length)
+            {
+                longestString = strings[counter];
+                counter++;
+            }
+        }
+
+        return longestString;
     }
 }
 
